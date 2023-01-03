@@ -14,7 +14,6 @@ con.On("ReceiveMessage", (string message) =>
 
 await con.StartAsync();
 
-
 var stream = con.StreamAsync<DateTime>("Streaming");
 
 await foreach (var item in stream)

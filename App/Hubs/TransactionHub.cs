@@ -3,23 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Aggregates.Transaction.Events;
+using Domain.Aggregates.Transaction;
 using FluentResults;
+using MediatR;
 using Microsoft.AspNetCore.SignalR;
 
 namespace App.Hubs
 {
 	public class TransactionHub : Hub
 	{
-		public TransactionHub()
-		{
+		public IMediator Mediator { get; }
 
+		public TransactionHub(IMediator mediator)
+		{
+			Mediator = mediator;
 		}
 
-		//public async Task BroadCast(string message, CancellationToken cancellationToken)
-		//{
-		//	await Clients.All.SendAsync("ReceiveTransaction", message, cancellationToken: cancellationToken);
+		public async Task ReceiveTransaction(TransactionCreated transaction)
+		{
+			await Mediator.Publish(new TransactionReceived()
+			{
+				Created = transaction.Created,
+				Data = transaction.Data,
+				From = transaction.From,
+				Id = transaction.Id,
+				To = transaction.To,
 
-		//}
+			});
+		}
+
+		
 
 	}
 }

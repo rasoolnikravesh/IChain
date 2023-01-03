@@ -11,9 +11,9 @@ public class TestHub : Hub
 	{
 		await Clients.All.SendAsync("ReceiveMessage", message);
 
-
+		
 	}
-
+	
 
 	public async IAsyncEnumerable<DateTime> Streaming([EnumeratorCancellation] CancellationToken cancellationToken)
 	{
@@ -24,6 +24,7 @@ public class TestHub : Hub
 		}
 	}
 
+	
 	public override async Task OnConnectedAsync()
 	{
 		Console.WriteLine("test");

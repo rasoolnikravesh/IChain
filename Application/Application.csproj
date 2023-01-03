@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentResults" Version="3.15.1" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="FluentResults" Version="3.15.1" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.4.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.12" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\NetworkBase\NetworkBase.csproj" />
-    <ProjectReference Include="..\Persistence\Persistence.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Domain\Domain.csproj" />
+		<ProjectReference Include="..\Persistence\Persistence.csproj" />
+	</ItemGroup>
 
 </Project>

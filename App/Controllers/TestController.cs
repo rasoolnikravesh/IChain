@@ -1,8 +1,10 @@
-﻿using Application.Aggregates.Transaction.Commands;
+﻿using App.Hubs;
+using Application.Aggregates.Transaction.Commands;
 using Domain.Aggregates.Transaction;
 using Domain.SeedWork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Persistence;
 
 namespace App.Controllers;
@@ -29,10 +31,12 @@ public class TestController : ControllerBase
 		foreach (IDomainEvent domainEvent in result.Value.DomainEvents)
 		{
 			//await Mediator.Publish(domainEvent, cancellationToken);
-			
+
 		}
 
 
 		return Ok(result);
 	}
+
+
 }

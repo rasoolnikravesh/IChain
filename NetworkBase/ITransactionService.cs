@@ -2,5 +2,5 @@
 
 public interface ITransactionService
 {
-	Task BroadCast(string message, CancellationToken cancellationToken);
+	//	Task BroadCast(trac, CancellationToken cancellationToken);
 }

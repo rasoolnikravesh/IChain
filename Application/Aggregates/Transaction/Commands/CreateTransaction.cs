@@ -2,7 +2,7 @@
 
 namespace Application.Aggregates.Transaction.Commands;
 
-public class CreateTransaction : ICommand<Domain.Aggregates.Transaction.Transaction>
+public class CreateTransaction : ICommand<Domain.Aggregates.Transaction.StringTransaction>
 {
 	public CreateTransaction(string from, string to, string data)
 	{

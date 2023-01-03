@@ -19,7 +19,7 @@ public static class DependecyContainer
 
 
 		collection.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-		collection.AddTransient(typeof(IPipelineBehavior<,>), typeof(EventBehavior<,>));
+		//collection.AddTransient(typeof(IPipelineBehavior<,>), typeof(EventBehavior<,>));
 
 		return collection;
 	}
