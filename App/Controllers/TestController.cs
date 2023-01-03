@@ -1,4 +1,6 @@
-﻿using Domain.Aggregates.Transaction;
+﻿using Application.Aggregates.Transaction.Commands;
+using Domain.Aggregates.Transaction;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Persistence;
 
@@ -8,25 +10,20 @@ namespace App.Controllers;
 [ApiController]
 public class TestController : ControllerBase
 {
-	public ICommandUnitOfWork CommandUnitOfWork { get; }
-	public IQueryUnitOfWork QueryUnitOfWork { get; }
+	public ISender Sender { get; }
 
 
-	public TestController(ICommandUnitOfWork commandUnitOfWork, IQueryUnitOfWork queryUnitOfWork)
+	public TestController(ISender sender)
 	{
-		CommandUnitOfWork = commandUnitOfWork;
-		QueryUnitOfWork = queryUnitOfWork;
+		Sender = sender;
 	}
 
 	[HttpGet]
 	public async Task<IActionResult> Set(CancellationToken cancellationToken)
 	{
-		//var t = new Transaction("Rasool", "mmd", "Test");
+		var t = new CreateTransaction("Rasool", "mmd", "Test");
 
-		//var result = await CommandUnitOfWork.GetCommandRepository<Transaction>().AddAsync(t, cancellationToken);
-		//return Ok();
-
-		var result = await QueryUnitOfWork.GetQueryRepository<Transaction>().GetAllAsync(cancellationToken);
+		var result = await Sender.Send(t, cancellationToken);
 
 		return Ok(result);
 	}

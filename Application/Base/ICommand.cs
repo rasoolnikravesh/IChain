@@ -1,11 +1,13 @@
-﻿namespace Application.Base;
+﻿using FluentResults;
 
-public interface ICommand : MediatR.IRequest
+namespace Application.Base;
+
+public interface ICommand : MediatR.IRequest<Result>
 {
 
 }
 
-public interface ICommand<out T> : MediatR.IRequest<T>
+public interface ICommand<T> : MediatR.IRequest<Result<T>>
 {
 
 }

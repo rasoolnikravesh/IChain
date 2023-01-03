@@ -1,6 +1,19 @@
-﻿namespace Application.Aggregates.Transaction.Commands;
+﻿using Application.Base;
 
-public class CreateTransaction
+namespace Application.Aggregates.Transaction.Commands;
+
+public class CreateTransaction : ICommand<Domain.Aggregates.Transaction.Transaction>
 {
+	public CreateTransaction(string from, string to, string data)
+	{
+		From = from;
+		To = to;
+		Data = data;
+	}
 
+	public string From { get; set; }
+
+	public string To { get; set; }
+
+	public string Data { get; set; }
 }

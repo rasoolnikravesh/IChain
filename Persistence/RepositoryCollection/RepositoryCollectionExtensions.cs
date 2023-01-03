@@ -16,8 +16,10 @@ public static class RepositoryCollectionExtensions
 		string baseType = RepositoryType.GetTypeInfo().ImplementedInterfaces.FirstOrDefault(x => x.GetTypeInfo()
 			.ImplementedInterfaces.Any(x => x == typeof(IRepository)))!.Name;
 
-		var types = Assembly.GetAssembly(ImpType)!.GetTypes().Where(x => x.GetInterfaces()
-			.Any(y => y.Name == baseType) && x.IsInterface);
+		var types = Assembly.GetAssembly(RepositoryType)!.GetTypes().Where(x => x.GetInterfaces().Any(y => y.Name == baseType) && x.IsInterface);
+
+		//var types = Assembly.GetAssembly(ImpType)!.GetTypes().Where(x => x.GetInterfaces()
+		//	.Any(y => y.Name == baseType) && x.IsInterface);
 
 		foreach (Type type in types)
 		{

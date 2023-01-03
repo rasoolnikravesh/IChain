@@ -1,7 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Domain.SeedWork;
+using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson.Serialization;
 using MongoDBPersistence.Base;
 using MongoDBPersistence.Repositories.Transaction;
 using Persistence;
+using Persistence.Repositories.Transaction;
 using Persistence.RepositoryCollection;
 
 namespace MongoDBPersistence.Settings;
@@ -35,6 +38,14 @@ public static class DependContainer
 			new QueryUnitOfWork(
 				new MongoContext(setting),
 				queryCollection.DeepCopy()));
+
+
+
+		BsonClassMap.RegisterClassMap<Entity>(x =>
+		{
+			x.MapIdMember(x => x.Id).SetOrder(1);
+			x.AutoMap();
+		});
 
 		return services;
 	}

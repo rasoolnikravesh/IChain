@@ -1,5 +1,4 @@
-﻿using Domain.Aggregates.Transaction;
-using MongoDB.Bson;
+﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
@@ -16,14 +15,16 @@ public class MongoContext
 	{
 		MongoClient = new MongoClient(setting.ConnectionString);
 
-		//BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
-
-		//BsonClassMap.RegisterClassMap<Transaction>(setting =>
-		//{
-		//	setting.AutoMap();
-
-		//});
+		BsonSerializer.RegisterSerializationProvider(new CsharpLegacyGuidSerializationProvider());
 
 		Database = MongoClient.GetDatabase(setting.DataBase);
+	}
+}
+
+class CsharpLegacyGuidSerializationProvider : IBsonSerializationProvider
+{
+	public IBsonSerializer? GetSerializer(Type type)
+	{
+		return type == typeof(Guid) ? new GuidSerializer(GuidRepresentation.CSharpLegacy) : null;
 	}
 }

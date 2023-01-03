@@ -29,7 +29,7 @@ internal class CommandUnitOfWork : UnitOfWork, ICommandUnitOfWork
 		{
 			ConstructorInfo? instanceCon =
 				descriptor.ImplementationType.GetConstructor(new[] { Context.GetType() });
-			object instance = instanceCon.Invoke(new object?[] { Context });
+			object instance = instanceCon!.Invoke(new object?[] { Context });
 
 			RepositoryDescriptor newDescriptor = new RepositoryDescriptor(descriptor.RepositoryType, instance);
 			RepositoryCollection.Remove(descriptor);

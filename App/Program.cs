@@ -1,4 +1,7 @@
+using System.Reflection;
 using App.Hubs;
+using Application.Aggregates.Transaction.Commands;
+using MediatR;
 using MongoDBPersistence.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 builder.Services.AddUnitOfWork(new InitialSetting(builder.Configuration.GetConnectionString("mongo"), "Test"));
+builder.Services.AddMediatR(Assembly.GetAssembly(typeof(CreateTransaction))!);
 
 
 
@@ -27,6 +31,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.MapHub<TestHub>("/Test");
+
 
 app.MapControllers();
 

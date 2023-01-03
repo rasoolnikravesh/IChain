@@ -1,12 +1,10 @@
-﻿namespace Application.Base;
+﻿using FluentResults;
 
-public interface IQuery : MediatR.IRequest
-{
+namespace Application.Base;
 
 
-}
 
-public interface IQuery<T> : MediatR.IRequest<T>
+public interface IQuery<T> : MediatR.IRequest<Result<T>>
 {
 
 }
