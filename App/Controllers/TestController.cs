@@ -1,5 +1,6 @@
 ﻿using Application.Aggregates.Transaction.Commands;
 using Domain.Aggregates.Transaction;
+using Domain.SeedWork;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Persistence;
@@ -10,12 +11,12 @@ namespace App.Controllers;
 [ApiController]
 public class TestController : ControllerBase
 {
-	public ISender Sender { get; }
+	public IMediator Mediator { get; }
 
 
-	public TestController(ISender sender)
+	public TestController(IMediator mediator)
 	{
-		Sender = sender;
+		Mediator = mediator;
 	}
 
 	[HttpGet]
@@ -23,7 +24,14 @@ public class TestController : ControllerBase
 	{
 		var t = new CreateTransaction("Rasool", "mmd", "Test");
 
-		var result = await Sender.Send(t, cancellationToken);
+		var result = await Mediator.Send(t, cancellationToken);
+
+		foreach (IDomainEvent domainEvent in result.Value.DomainEvents)
+		{
+			//await Mediator.Publish(domainEvent, cancellationToken);
+			
+		}
+
 
 		return Ok(result);
 	}

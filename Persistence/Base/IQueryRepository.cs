@@ -13,3 +13,4 @@ public interface IQueryRepository<Tentity> : IRepository where Tentity : IAggreg
 
 	Task<Tentity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default(CancellationToken));
 }
+

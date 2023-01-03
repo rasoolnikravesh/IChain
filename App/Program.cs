@@ -1,6 +1,7 @@
 using System.Reflection;
 using App.Hubs;
 using Application.Aggregates.Transaction.Commands;
+using Application.Settings;
 using MediatR;
 using MongoDBPersistence.Settings;
 
@@ -14,11 +15,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 builder.Services.AddUnitOfWork(new InitialSetting(builder.Configuration.GetConnectionString("mongo"), "Test"));
-builder.Services.AddMediatR(Assembly.GetAssembly(typeof(CreateTransaction))!);
 
+
+builder.Services.AddServices();
 
 
 WebApplication app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

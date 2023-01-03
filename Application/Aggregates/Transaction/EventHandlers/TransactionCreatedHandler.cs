@@ -9,9 +9,9 @@ namespace Application.Aggregates.Transaction.EventHandlers
 {
 	public class TransactionCreatedHandler:MediatR.INotificationHandler<TransactionCreated>
 	{
-		public Task Handle(TransactionCreated notification, CancellationToken cancellationToken)
+		public async Task Handle(TransactionCreated notification, CancellationToken cancellationToken)
 		{
-			throw new NotImplementedException();
+			//throw new NotImplementedException();
 		}
 	}
 }
