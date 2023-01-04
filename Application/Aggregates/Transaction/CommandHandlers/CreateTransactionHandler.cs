@@ -1,4 +1,5 @@
-﻿using Application.Aggregates.Transaction.Commands;
+﻿using System.Diagnostics;
+using Application.Aggregates.Transaction.Commands;
 using Application.Aggregates.Transaction.Events;
 using Application.Base;
 using FluentResults;
@@ -16,7 +17,11 @@ namespace Application.Aggregates.Transaction.CommandHandlers
 		public CreateTransactionHandler(ICommandUnitOfWork unitOfWork)
 		{
 			UnitOfWork = unitOfWork;
+			var watch = Stopwatch.StartNew();
 			Repository = (ITransactionCommandRepository)UnitOfWork.GetCommandRepository<Domain.Aggregates.Transaction.StringTransaction>();
+			watch.Stop();
+			Console.WriteLine($"Repository Geted in {watch.ElapsedMilliseconds}");
+
 
 		}
 

@@ -1,4 +1,5 @@
-﻿using App.Hubs;
+﻿using System.Diagnostics;
+using App.Hubs;
 using Application.Aggregates.Transaction.Commands;
 using Domain.Aggregates.Transaction;
 using Domain.SeedWork;
@@ -26,7 +27,12 @@ public class TestController : ControllerBase
 	{
 		var t = new CreateTransaction("Rasool", "mmd", "Test");
 
+
+		Stopwatch watch = Stopwatch.StartNew();
 		var result = await Mediator.Send(t, cancellationToken);
+		watch.Stop();
+
+		Console.WriteLine($"CommandSend in {watch.ElapsedMilliseconds}");
 
 		foreach (IDomainEvent domainEvent in result.Value.DomainEvents)
 		{

@@ -22,6 +22,11 @@ namespace App.Hubs
 
 		public async Task ReceiveTransaction(TransactionCreated transaction)
 		{
+
+			await Clients.All.SendAsync("Test", "Hello");
+
+
+
 			await Mediator.Publish(new TransactionReceived()
 			{
 				Created = transaction.Created,
@@ -33,7 +38,16 @@ namespace App.Hubs
 			});
 		}
 
-		
+
+		public async Task Stream(IAsyncEnumerable<DateTime> stream)
+		{
+			await foreach (var s in stream)
+			{
+				Console.WriteLine(s);
+
+			}
+		}
+
 
 	}
 }

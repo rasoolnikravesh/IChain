@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Diagnostics;
+using System.Reflection;
 using Domain.SeedWork;
 using Persistence;
 using Persistence.Base;
@@ -19,9 +20,15 @@ internal class CommandUnitOfWork : UnitOfWork, ICommandUnitOfWork
 
 	public ICommandRepository<T> GetCommandRepository<T>() where T : class, IAggregateRoot
 	{
+
+		var watch = Stopwatch.StartNew();
 		RepositoryDescriptor? descriptor = RepositoryCollection
 			.FirstOrDefault(z => z.ImplementationType
 				.GetInterfaces().Any(x => x.GenericTypeArguments.Any(y => y == typeof(T))));
+		watch.Stop();
+
+		Console.WriteLine($"Collection Searched in {watch.ElapsedMilliseconds}");
+
 		if (descriptor is null)
 			throw new ArgumentNullException();
 

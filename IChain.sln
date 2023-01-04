@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDBPersistence", "MongoPersistence\MongoDBPersistence.csproj", "{CF799B54-704E-4363-AA6E-D876BB3D3ADB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkBase", "NetworkBase\NetworkBase.csproj", "{3C2CA463-16B9-4A04-B377-36C75EE2DF47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{CF799B54-704E-4363-AA6E-D876BB3D3ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF799B54-704E-4363-AA6E-D876BB3D3ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF799B54-704E-4363-AA6E-D876BB3D3ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2CA463-16B9-4A04-B377-36C75EE2DF47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2CA463-16B9-4A04-B377-36C75EE2DF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2CA463-16B9-4A04-B377-36C75EE2DF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2CA463-16B9-4A04-B377-36C75EE2DF47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{5F9A831B-8B8B-4683-8767-BE2D332113AF} = {F7553B39-2C91-4516-BBD4-55986B404662}
 		{4FCC288C-437D-41A3-B58A-B74C3F99D056} = {0EED33B5-F232-4E71-8CAE-7FE9872135DC}
 		{CF799B54-704E-4363-AA6E-D876BB3D3ADB} = {0EED33B5-F232-4E71-8CAE-7FE9872135DC}
+		{3C2CA463-16B9-4A04-B377-36C75EE2DF47} = {F7553B39-2C91-4516-BBD4-55986B404662}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1BE5BA0B-675E-43E7-8E75-0EDEA66C8CD6}
