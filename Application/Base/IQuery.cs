@@ -4,7 +4,8 @@ namespace Application.Base;
 
 
 
-public interface IQuery<T> : MediatR.IRequest<Result<T>>
+public interface IQuery<TResponse> : MediatR.IRequest<Result<TResponse>>
 {
 
 }
+

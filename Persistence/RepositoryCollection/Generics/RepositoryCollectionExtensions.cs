@@ -1,8 +1,7 @@
-﻿namespace Persistence.RepositoryCollection.Generics
+﻿namespace Persistence.RepositoryCollection.Generics;
+
+public static class RepositoryCollectionExtensions
 {
-	public static class RepositoryCollectionExtensions
-	{
 		
 
-	}
 }

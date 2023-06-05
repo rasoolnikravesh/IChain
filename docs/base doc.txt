@@ -1,0 +1,8 @@
+api for clients
+service For validate Blocks
+message Broker For messaging
+p2p service to comunicate with other nodes
+
+voting platform
+text sending platform
+money platform

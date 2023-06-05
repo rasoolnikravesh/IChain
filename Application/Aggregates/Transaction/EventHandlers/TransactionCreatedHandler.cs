@@ -5,24 +5,38 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Aggregates.Transaction.Events;
 using Microsoft.AspNetCore.SignalR.Client;
+using NetworkBase;
 
 namespace Application.Aggregates.Transaction.EventHandlers;
 
 public class TransactionCreatedHandler : MediatR.INotificationHandler<TransactionCreated>
 {
+	public IClientService Service { get; }
 
 	private readonly HubConnection con;
 
-	public TransactionCreatedHandler()
+	public TransactionCreatedHandler(IClientService service)
 	{
-		con = new HubConnectionBuilder().WithUrl("https://localhost:5001/Transaction")
-			.WithAutomaticReconnect()
-			.Build();
+		Service = service;
+		if (service.Get("Transaction", out var hub))
+		{
+			con = hub!;
+		}
+		else
+		{
+			con = new HubConnectionBuilder().WithUrl("https://localhost:5001/Transaction")
+				.WithAutomaticReconnect()
+				.Build();
+			service.Add("Transaction", con);
+		}
 	}
 	public async Task Handle(TransactionCreated notification, CancellationToken cancellationToken)
 	{
-		
 
+		if (con.State == HubConnectionState.Disconnected)
+		{
+			await con.StartAsync(cancellationToken);
+		}
 
 		con.Closed += Con_Closed;
 
