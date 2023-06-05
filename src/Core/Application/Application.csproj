@@ -13,9 +13,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Infrastructure\Persistence\Persistence.csproj" />
 		<ProjectReference Include="..\Domain\Domain.csproj" />
 		<ProjectReference Include="..\NetworkBase\NetworkBase.csproj" />
-		<ProjectReference Include="..\Persistence\Persistence.csproj" />
 	</ItemGroup>
 
 </Project>
