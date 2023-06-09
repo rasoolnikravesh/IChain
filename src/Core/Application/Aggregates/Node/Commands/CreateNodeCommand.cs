@@ -1,14 +1,12 @@
 ﻿namespace Application.Aggregates.Node.Commands;
 
-public class CreateNodeCommand : ICommand
+public record CreateNodeCommand(string Name, string Ip, ushort Port, string AccountAddress) : ICommand
 {
-	public string Name { get; set; }
+	public string Name { get; set; } = Name;
 
-	public Guid Id { get; set; }
+	public string Ip { get; set; } = Ip;
 
-	public string Ip { get; set; }
+	public ushort Port { get; set; } = Port;
 
-	public int Port { get; set; }
-
-	public string AccountAddress { get; set; }
+	public string AccountAddress { get; set; } = AccountAddress;
 }

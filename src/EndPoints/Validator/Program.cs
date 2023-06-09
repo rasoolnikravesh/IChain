@@ -1,4 +1,6 @@
 using Application.Settings;
+using Network.Grpc.Services;
+using Network.Services;
 using Persistence.Mongo.Settings;
 using Validator.Services;
 
@@ -15,7 +17,7 @@ builder.Services.AddGrpc(op =>
 });
 
 
-
+builder.Services.AddScoped<INodeClientService, NodeClientService>();
 builder.Services.AddServices();
 builder.Services.AddUnitOfWork(new InitialSetting("mongodb://localhost:27017", "BlockChain"));
 
