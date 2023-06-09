@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\..\Core\Application\Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Network.Grpc\Network.Grpc.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Persistence.Mongo\Persistence.Mongo.csproj" />
   </ItemGroup>
 
 </Project>

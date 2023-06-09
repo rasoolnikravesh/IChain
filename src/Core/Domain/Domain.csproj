@@ -12,4 +12,8 @@
     <PackageReference Include="MongoDB.Bson" Version="2.18.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Utitlity\Utility.csproj" />
+  </ItemGroup>
+
 </Project>

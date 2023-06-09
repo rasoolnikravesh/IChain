@@ -2,7 +2,7 @@
 
 namespace Persistence.Repositories.Transaction;
 
-public interface ITransactionQueryRepository : IQueryRepository<Domain.Aggregates.Transaction.StringTransaction>
+public interface ITransactionQueryRepository : IQueryRepository<Domain.Aggregates.Transaction.MoneyTransaction>
 {
 
 }

@@ -1,74 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Aggregates.Transaction.Events;
-using Microsoft.AspNetCore.SignalR.Client;
-using NetworkBase;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
+//using Application.Aggregates.Transaction.Events;
+//using Microsoft.AspNetCore.SignalR.Client;
+//using NetworkBase;
 
-namespace Application.Aggregates.Transaction.EventHandlers;
+//namespace Application.Aggregates.Transaction.EventHandlers;
 
-public class TransactionCreatedHandler : MediatR.INotificationHandler<TransactionCreated>
-{
-	public IClientService Service { get; }
+//public class TransactionCreatedHandler : MediatR.INotificationHandler<TransactionCreated<double>>
+//{
+//	public IClientService Service { get; }
 
-	private readonly HubConnection con;
+//	private readonly HubConnection con;
 
-	public TransactionCreatedHandler(IClientService service)
-	{
-		Service = service;
-		if (service.Get("Transaction", out var hub))
-		{
-			con = hub!;
-		}
-		else
-		{
-			con = new HubConnectionBuilder().WithUrl("https://localhost:5001/Transaction")
-				.WithAutomaticReconnect()
-				.Build();
-			service.Add("Transaction", con);
-		}
-	}
-	public async Task Handle(TransactionCreated notification, CancellationToken cancellationToken)
-	{
+//	public TransactionCreatedHandler(IClientService service)
+//	{
+//		Service = service;
 
-		if (con.State == HubConnectionState.Disconnected)
-		{
-			await con.StartAsync(cancellationToken);
-		}
+//	}
 
-		con.Closed += Con_Closed;
+//	public Task Handle(TransactionCreated<double> notification, CancellationToken cancellationToken)
+//	{
 
-		con.On("Test", (string s) =>
-		{
-			Console.WriteLine(s);
-		});
+//		//if (con.State == HubConnectionState.Disconnected)
+//		//{
+//		//	await con.StartAsync(cancellationToken);
+//		//}
 
-		await con.StartAsync(cancellationToken).WaitAsync(cancellationToken);
+//		//con.Closed += Con_Closed;
 
-		await con.SendAsync("ReceiveTransaction", notification, cancellationToken);
+//		//con.On("Test", (string s) =>
+//		//{
+//		//	Console.WriteLine(s);
+//		//});
 
-		//await con.SendAsync("stream", arg1: clientStreamData(), cancellationToken);
-	}
+//		//await con.StartAsync(cancellationToken).WaitAsync(cancellationToken);
 
-	public async IAsyncEnumerable<DateTime> clientStreamData()
-	{
-		for (var i = 0; i < 500; i++)
-		{
-			var data = DateTime.Now;
-			await Task.Delay(300);
-
-			yield return data;
-		}
-		//After the for loop has completed and the local function exits the stream completion will be sent.
-	}
-
-	private Task Con_Closed(Exception? arg)
-	{
-
-		Console.WriteLine("Closed");
-
-		return Task.CompletedTask;
-	}
-}
+//		//await con.SendAsync("ReceiveTransaction", notification, cancellationToken);
+//		throw new NotImplementedException();
+//	}
+//}

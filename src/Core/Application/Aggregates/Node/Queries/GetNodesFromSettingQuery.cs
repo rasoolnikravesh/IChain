@@ -9,7 +9,7 @@ using MediatR;
 
 namespace Application.Aggregates.Node.Queries;
 
-public class GetNodesFromSettingQuery : IQuery<List<NodeInformation>>
-{
+//public class GetNodesFromSettingQuery : IQuery<List<NodeInformation>>
+//{
 
-}
+//}

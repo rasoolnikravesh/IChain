@@ -15,17 +15,17 @@ public class StartService : IStartService
 
 	public async Task StartAsync()
 	{
-		var nodes = await Mediator.Send(new GetNodesFromSettingQuery());
-		if (nodes.IsSuccess)
-		{
-			Console.WriteLine("Started Communication with Nodes");
-			await Mediator.Send(new StartCommunicationCommand(nodes.Value));
-		}
-		else
-		{
+		//var nodes = await Mediator.Send(new GetNodesFromSettingQuery());
+		//if (nodes.IsSuccess)
+		//{
+		//	Console.WriteLine("Started Communication with Nodes");
+		//	await Mediator.Send(new StartCommunicationCommand(nodes.Value));
+		//}
+		//else
+		//{
 
-			Console.WriteLine("Started Without Any Nodes");
-		}
+		//	Console.WriteLine("Started Without Any Nodes");
+		//}
 
 	}
 }

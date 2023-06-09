@@ -2,18 +2,21 @@
 
 namespace Application.Aggregates.Transaction.Commands;
 
-public class CreateTransaction : ICommand<Domain.Aggregates.Transaction.StringTransaction>
+public record CreateTransaction : ICommand<Domain.Aggregates.Transaction.MoneyTransaction>
 {
-	public CreateTransaction(string from, string to, string data)
+	public CreateTransaction(string from, string to, double amount, double fee)
 	{
 		From = from;
 		To = to;
-		Data = data;
+		Amount = amount;
+		Fee = fee;
 	}
 
-	public string From { get; set; }
+	public string From { get; }
 
-	public string To { get; set; }
+	public string To { get; }
 
-	public string Data { get; set; }
+	public double Amount { get; }
+
+	public double Fee { get; }
 }

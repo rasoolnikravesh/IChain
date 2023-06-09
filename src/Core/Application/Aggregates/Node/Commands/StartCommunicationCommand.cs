@@ -8,12 +8,12 @@ using Application.Base;
 
 namespace Application.Aggregates.Node.Commands;
 
-public class StartCommunicationCommand : ICommand
-{
-	public StartCommunicationCommand(List<NodeInformation> nodes)
-	{
-		Nodes = nodes;
-	}
+//public class StartCommunicationCommand : ICommand
+//{
+//	public StartCommunicationCommand(List<NodeInformation> nodes)
+//	{
+//		Nodes = nodes;
+//	}
 
-	public List<NodeInformation> Nodes { get; set; }
-}
+//	public List<NodeInformation> Nodes { get; set; }
+//}

@@ -2,7 +2,7 @@
 
 namespace Application.Aggregates.Transaction.Events;
 
-public class TransactionCreated : IDomainEvent
+public class TransactionCreated<T> : IDomainEvent
 {
 	public Guid Id { get; set; }
 
@@ -12,5 +12,7 @@ public class TransactionCreated : IDomainEvent
 
 	public string To { get; set; }
 
-	public string Data { get; set; }
+	public T Data { get; set; }
+
+	public double Fee { get; set; }
 }

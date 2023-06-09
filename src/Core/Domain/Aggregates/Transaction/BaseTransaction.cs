@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.SeedWork;
 using FluentResults;
+using Utility;
 
 namespace Domain.Aggregates.Transaction;
 
@@ -23,11 +25,11 @@ public class BaseTransaction : AggregateRoot
 		To = to;
 	}
 
-	public static Result<BaseTransaction> Create(string From, string To)
+	public static Result<BaseTransaction> Create(string from, string to)
 	{
 		Result<BaseTransaction> result = new();
 
-		BaseTransaction data = new(From, To);
+		BaseTransaction data = new(from, to);
 
 		result.WithValue(data);
 
@@ -38,7 +40,9 @@ public class BaseTransaction : AggregateRoot
 
 
 
-	public string From { get; private set; }
+	public string From { get; }
 
-	public string To { get; private set; }
+	public string To { get; }
+
+	public string Hash => HashUtility.ComputeSha256Hash($"{From}{To}");
 }

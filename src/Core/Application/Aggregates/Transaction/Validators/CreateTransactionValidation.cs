@@ -15,6 +15,7 @@ public class CreateTransactionValidation : AbstractValidator<CreateTransaction>
 	{
 		RuleFor(x => x.To).NotNull();
 		RuleFor(x => x.From).NotNull();
-		RuleFor(x => x.Data).NotNull();
+		RuleFor(x => x.Amount).NotNull();
+		RuleFor(x => x.Fee).NotNull();
 	}
 }
