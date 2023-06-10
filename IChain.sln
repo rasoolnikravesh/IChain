@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Validator", "src\EndPoints\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence.Mongo", "src\Infrastructure\Persistence.Mongo\Persistence.Mongo.csproj", "{9BED03EF-91C1-4216-A789-33F2AC2A08EA}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5B953071-1022-4BC9-820B-C99007C8DB99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{9BED03EF-91C1-4216-A789-33F2AC2A08EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BED03EF-91C1-4216-A789-33F2AC2A08EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BED03EF-91C1-4216-A789-33F2AC2A08EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B953071-1022-4BC9-820B-C99007C8DB99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B953071-1022-4BC9-820B-C99007C8DB99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B953071-1022-4BC9-820B-C99007C8DB99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B953071-1022-4BC9-820B-C99007C8DB99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

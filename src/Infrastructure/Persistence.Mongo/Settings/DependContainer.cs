@@ -1,4 +1,5 @@
-﻿using Domain.Aggregates.Transaction;
+﻿using Domain.Aggregates.Node;
+using Domain.Aggregates.Transaction;
 using Domain.SeedWork;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson.Serialization;
@@ -41,27 +42,7 @@ public static class DependContainer
 
 
 
-		BsonClassMap.RegisterClassMap<Entity>(x =>
-		{
-			x.MapIdMember(entity => entity.Id).SetOrder(1);
-			x.AutoMap();
-		});
 
-		BsonClassMap.RegisterClassMap<BaseTransaction>(x =>
-		{
-			x.MapMember(transaction => transaction.Hash);
-			x.MapMember(transaction => transaction.From);
-			x.MapMember(transaction => transaction.To);
-		});
-
-		BsonClassMap.RegisterClassMap<MoneyTransaction>(x =>
-		{
-			x.SetDiscriminator(nameof(MoneyTransaction));
-			x.MapProperty(transaction => transaction.Fee);
-			x.MapProperty(transaction => transaction.Amount);
-			x.AutoMap();
-
-		});
 
 		return services;
 	}

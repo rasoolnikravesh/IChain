@@ -20,8 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\Models.proto" GrpcServices="Both" />
-    <Protobuf Include="Protos\Node.proto">
+    <Protobuf Include="Protos\Models.proto" GrpcServices="Both" ProtRoot="Proto\" />
+    <Protobuf Include="Protos\Node.proto" ProtRoot="Proto\" >
       <GrpcServices>Both</GrpcServices>
     </Protobuf>
   </ItemGroup>

@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  validatordb:
+    container_name: validatordb
+    restart: always
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+  validator:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "DatabaseSettings:ConnectionStrings=mongodb://validatordb:27017"
+      - "DatabaseSettings:DataBaseName=chain1"
+    depends_on:
+      - validatordb
+    ports:
+      - "8888:80"
+      #- "4433:443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+#https://+:443;

@@ -2,7 +2,6 @@
 using FluentResults;
 using Network.Services;
 using Persistence;
-using Persistence.Base;
 
 namespace Application.Aggregates.Node.CommandHandlers;
 
@@ -11,7 +10,7 @@ public class CreateNodeCommandHandler : Base.IRequestHandler<CreateNodeCommand>
 	public INodeClientService ClientService { get; }
 	public ICommandUnitOfWork CommandUnitOfWork { get; }
 
-	public CreateNodeCommandHandler(INodeClientService clientService,ICommandUnitOfWork commandUnitOfWork)
+	public CreateNodeCommandHandler(INodeClientService clientService, ICommandUnitOfWork commandUnitOfWork)
 	{
 		ClientService = clientService;
 		CommandUnitOfWork = commandUnitOfWork;
@@ -19,22 +18,21 @@ public class CreateNodeCommandHandler : Base.IRequestHandler<CreateNodeCommand>
 
 	public async Task<Result> Handle(CreateNodeCommand request, CancellationToken cancellationToken)
 	{
-		var NodeAlive = await
+		var nodeAlive = await
 			ClientService.TestNodeAlive($"http://{request.Ip}:{request.Port}", cancellationToken);
 
-		if (NodeAlive.IsSuccess)
-		{
-			var node =
-				Domain.Aggregates.Node.Node.Create(request.Name, request.AccountAddress, request.Ip,
+		if (nodeAlive.IsFailed) return Result.Ok();
+		var node =
+			Domain.Aggregates.Node.Node.Create(request.Name, request.AccountAddress, request.Ip,
 				request.Port);
-			if (node.IsSuccess)
-			{
-				var repo
-				
-			}
-		}
 
-		return Result.Ok();
+		if (node.IsFailed) return Result.Ok();
+
+		var repo = CommandUnitOfWork.GetCommandRepository<Domain.Aggregates.Node.Node>();
+
+		Result result = await repo.AddAsync(node.Value, cancellationToken);
+
+		return result;
 
 	}
 }

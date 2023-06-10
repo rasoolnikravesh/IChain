@@ -3,7 +3,6 @@ using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MediatR;
 using Network.Grpc.Services;
-using Network.Services;
 
 namespace Validator.Services
 {
@@ -23,14 +22,14 @@ namespace Validator.Services
 
 		public override async Task<NodeAliveResponse> NodeAlive(Empty request, ServerCallContext context)
 		{
-			var result = await Sender.Send(new GetSelfNodeAliveQuery());
+			var result = await Sender.Send(request: new GetSelfNodeAliveQuery());
 			if (result.IsSuccess)
-
-				return new NodeAliveResponse() { Message = result.Value };
+				return new NodeAliveResponse() { Message = result.Value, Status = true };
 
 			return new NodeAliveResponse()
 			{
-				Message = ""
+				Message = "",
+				Status = false
 			};
 
 		}

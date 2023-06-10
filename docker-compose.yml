@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  validatordb:
+    image: mongo
+  validator:
+    image: ${DOCKER_REGISTRY-}validator
+    build:
+      context: .
+      dockerfile: src/EndPoints/Validator/Dockerfile
+    
+volumes:
+  mongo_data:

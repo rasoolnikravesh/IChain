@@ -19,7 +19,9 @@ builder.Services.AddGrpc(op =>
 
 builder.Services.AddScoped<INodeClientService, NodeClientService>();
 builder.Services.AddServices();
-builder.Services.AddUnitOfWork(new InitialSetting("mongodb://localhost:27017", "BlockChain"));
+var connectionString = builder.Configuration["DatabaseSettings:ConnectionStrings"];
+var database = builder.Configuration["DatabaseSettings:DataBaseName"];
+builder.Services.AddUnitOfWork(new InitialSetting(connectionString!, database!));
 
 WebApplication app = builder.Build();
 

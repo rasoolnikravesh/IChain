@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Domain.SeedWork;
 
@@ -19,6 +20,8 @@ public class Entity : IEntity
 		return !(left == right);
 	}
 
+	[BsonId]
+	[BsonGuidRepresentation(GuidRepresentation.CSharpLegacy)]
 	public Guid Id { get; set; }
 
 	public DateTime RegisterDate { get; set; }
