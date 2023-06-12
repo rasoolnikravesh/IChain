@@ -4,6 +4,7 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Application.Base;
+using Application.Services;
 using MediatR;
 
 namespace Application.Settings;
@@ -14,12 +15,14 @@ public static class DependecyContainer
 	{
 		collection.AddValidatorsFromAssembly(typeof(CreateTransactionValidation).Assembly);
 
-		collection.AddMediatR(Assembly.GetAssembly(typeof(CreateTransaction))!);
+		collection.AddMediatR(Assembly.GetAssembly(typeof(CreateTransactionCommand))!);
 
 
 
 		collection.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 		//collection.AddTransient(typeof(IPipelineBehavior<,>), typeof(EventBehavior<,>));
+
+		collection.AddSingleton<IBlockChain, BlockChain>();
 
 		return collection;
 	}

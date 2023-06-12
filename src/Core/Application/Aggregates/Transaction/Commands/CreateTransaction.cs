@@ -2,9 +2,9 @@
 
 namespace Application.Aggregates.Transaction.Commands;
 
-public record CreateTransaction : ICommand<Domain.Aggregates.Transaction.MoneyTransaction>
+public record CreateTransactionCommand : ICommand<Domain.Aggregates.Transaction.MoneyTransaction>
 {
-	public CreateTransaction(string from, string to, double amount, double fee)
+	public CreateTransactionCommand(string from, string to, double amount, double fee)
 	{
 		From = from;
 		To = to;

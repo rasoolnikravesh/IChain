@@ -1,3 +1,4 @@
+using Application.Services;
 using Application.Settings;
 using Network.Grpc.Services;
 using Network.Services;
@@ -19,14 +20,22 @@ builder.Services.AddGrpc(op =>
 
 builder.Services.AddScoped<INodeClientService, NodeClientService>();
 builder.Services.AddServices();
+
 var connectionString = builder.Configuration["DatabaseSettings:ConnectionStrings"];
 var database = builder.Configuration["DatabaseSettings:DataBaseName"];
 builder.Services.AddUnitOfWork(new InitialSetting(connectionString!, database!));
+
+
 
 WebApplication app = builder.Build();
 
 
 app.MapGrpcService<NodeServerService>();
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+
+//for start Validate
+using AsyncServiceScope scope = app.Services.CreateAsyncScope();
+_ = scope.ServiceProvider.GetRequiredService<IBlockChain>();
+scope.Dispose();
 
 app.Run();

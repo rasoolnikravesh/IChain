@@ -8,6 +8,7 @@ using Persistence.Base;
 namespace Persistence.Repositories.Node
 {
 	public interface INodeQueryRepository : IQueryRepository<Domain.Aggregates.Node.Node>
-	{ 
+	{
+		Task<bool> SelfNodeConfiged();
 	}
 }

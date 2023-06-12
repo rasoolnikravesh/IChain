@@ -1,4 +1,4 @@
-﻿using Domain.Aggregates.Node;
+﻿using System.Reflection;
 using Domain.Aggregates.Transaction;
 using Domain.SeedWork;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,9 +40,17 @@ public static class DependContainer
 				new MongoContext(setting),
 				QueryCollection.DeepCopy()));
 
+		
 
+		
 
-
+		Assembly? assembly = Assembly.GetAssembly(typeof(DependContainer));
+            
+		var classMaps = assembly!.GetTypes()
+			.Where(t => t.BaseType is { IsGenericType: true } && t.BaseType.GetGenericTypeDefinition() == typeof(MongodbClassMap<>));
+            
+		foreach (Type classMap in classMaps)
+			Activator.CreateInstance(classMap);
 
 		return services;
 	}

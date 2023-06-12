@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Domain.SeedWork;
-using MediatR;
+﻿using MediatR;
 using Persistence;
-using Persistence.Base;
 
 namespace Application.Base;
 

@@ -9,8 +9,7 @@ namespace Network.Services
 {
 	public interface INodeClientService
 	{
-		Task Test();
-
+		
 		Task<Result<string>> TestNodeAlive(string address, CancellationToken cancellationToken);
 	}
 }

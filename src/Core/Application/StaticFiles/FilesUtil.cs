@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Services;
-
-public interface IAppService
+namespace Application.StaticFiles
 {
-	public string GetAppLocationPath();
+	public class FilesUtil
+	{
+	}
 }

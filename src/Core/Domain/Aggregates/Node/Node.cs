@@ -20,11 +20,12 @@ public class Node : AggregateRoot
 
 	}
 
-	protected Node(string name, string accountName, string ip, ushort port)
+	protected Node(string name, string accountName, string ip, ushort port, bool self)
 	{
 		Ip = ip;
 		Port = port;
 		Name = name;
+		Self = self;
 		AccountName = accountName;
 	}
 
@@ -32,7 +33,18 @@ public class Node : AggregateRoot
 	{
 		Result<Node> result = new();
 
-		Node data = new(name, accountName, ip, port);
+		Node data = new(name, accountName, ip, port, false);
+
+		result.WithValue(data);
+
+		return result;
+	}
+
+	public static Result<Node> CreateSelf(string name, string accountAddress)
+	{
+		Result<Node> result = new();
+
+		Node data = new(name, accountAddress, "", 0, true);
 
 		result.WithValue(data);
 
@@ -47,5 +59,7 @@ public class Node : AggregateRoot
 	public string Ip { get; }
 
 	public ushort Port { get; }
+
+	public bool Self { get; }
 
 }

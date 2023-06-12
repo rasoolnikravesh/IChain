@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.Aggregates.Node.Models;
+﻿namespace Application.Aggregates.Node.Models;
 
 public class NodeInformation
 {
