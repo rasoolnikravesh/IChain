@@ -8,18 +8,25 @@ package network;
 
 service Node {
 
-  rpc SayHello (HelloRequest) returns (HelloReply);
-
+  
   rpc NodeAlive (google.protobuf.Empty) returns (NodeAliveResponse);
+  rpc AddNode (AddNodeRequest) returns (AddNodeResponse);
 }
 
 
-
-message HelloRequest {
-  string name = 1;
+message AddNodeRequest {
+	string name = 1;
+	string url = 2; 
+	int32 port = 3;
+	string address = 4;
+}
+message AddNodeResponse {
+	Status status = 1;
+	string message =2;
 }
 
-message HelloReply {
-  string message = 1;
+enum Status {
+	SUCCESS=0;
+	FAILED=1;
 }
 

@@ -15,7 +15,7 @@ public class TransactionController : ApiControllerBase
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> CreateTransaction(CreateTransaction request)
+	public async Task<IActionResult> CreateTransaction(CreateTransactionCommand request)
 	{
 		var result = await Sender.Send(request);
 		if (result.IsFailed)
@@ -23,12 +23,6 @@ public class TransactionController : ApiControllerBase
 			return BadRequest(result);
 		return Ok(result);
 	}
-	[HttpGet]
-	public async Task<IActionResult> Test()
-	{
-		await ClientService.Test();
-
-		return Ok();
-	}
+	
 
 }

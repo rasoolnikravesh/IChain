@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Application.Aggregates.Transaction.Commands;
+﻿using Application.Aggregates.Transaction.Commands;
 using Application.Aggregates.Transaction.Events;
 using Application.Base;
 using Domain.Aggregates.Transaction;
@@ -9,7 +8,7 @@ using Persistence.Repositories.Transaction;
 
 namespace Application.Aggregates.Transaction.CommandHandlers;
 
-public class CreateTransactionHandler : IRequestHandler<CreateTransaction, Domain.Aggregates.Transaction.MoneyTransaction>
+public class CreateTransactionHandler : IRequestHandler<CreateTransactionCommand, Domain.Aggregates.Transaction.MoneyTransaction>
 {
 	public ICommandUnitOfWork UnitOfWork { get; }
 
@@ -22,11 +21,11 @@ public class CreateTransactionHandler : IRequestHandler<CreateTransaction, Domai
 
 	}
 
-	public async Task<Result<MoneyTransaction>> Handle(CreateTransaction request, CancellationToken cancellationToken)
+	public async Task<Result<MoneyTransaction>> Handle(CreateTransactionCommand request, CancellationToken cancellationToken)
 	{
 
 		var transaction =
-			MoneyTransaction.Create(request.From, request.To, request.Amount, request.Fee);
+			MoneyTransaction.Create(request.From, request.To, request.Amount, request.Fee,"","");
 
 		if (transaction.IsFailed)
 			return transaction;

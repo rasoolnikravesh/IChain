@@ -16,11 +16,7 @@ namespace Network.Grpc.Services
 		{
 		}
 
-		public async Task Test()
-		{
-
-			//var s = await Client.SayHelloAsync(new HelloRequest() { Name = "sdsds" });
-		}
+		
 
 		public async Task<Result<string>> TestNodeAlive(string address, CancellationToken cancellationToken)
 		{

@@ -1,8 +1,11 @@
-﻿using Application.Aggregates.Node.Queries;
+﻿using Application.Aggregates.Node.Commands;
+using Application.Aggregates.Node.Queries;
+using FluentResults;
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MediatR;
 using Network.Grpc.Services;
+using Status = Network.Grpc.Services.Status;
 
 namespace Validator.Services
 {
@@ -15,10 +18,7 @@ namespace Validator.Services
 			Sender = sender;
 		}
 
-		public override async Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
-		{
-			return new HelloReply() { Message = "Sdfsdf" };
-		}
+		
 
 		public override async Task<NodeAliveResponse> NodeAlive(Empty request, ServerCallContext context)
 		{
@@ -32,6 +32,19 @@ namespace Validator.Services
 				Status = false
 			};
 
+		}
+
+		public override async Task<AddNodeResponse> AddNode(AddNodeRequest request, ServerCallContext context)
+		{
+			Result result =
+				await Sender.Send(new CreateNodeCommand(request.Name, request.Url, (ushort)request.Port,
+					request.Address));
+			if (result.IsSuccess)
+				return new AddNodeResponse()
+				{
+					Status = Status.Success,
+				};
+			return new AddNodeResponse();
 		}
 	}
 }
