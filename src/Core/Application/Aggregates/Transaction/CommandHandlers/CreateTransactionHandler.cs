@@ -25,7 +25,7 @@ public class CreateTransactionHandler : IRequestHandler<CreateTransactionCommand
 	{
 
 		var transaction =
-			MoneyTransaction.Create(request.From, request.To, request.Amount, request.Fee);
+			MoneyTransaction.Create(request.From, request.To, request.Amount, request.Fee,"","");
 
 		if (transaction.IsFailed)
 			return transaction;
