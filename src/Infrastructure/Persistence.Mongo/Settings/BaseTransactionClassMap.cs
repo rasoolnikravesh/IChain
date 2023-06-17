@@ -16,6 +16,8 @@ namespace Persistence.Mongo.Settings
 			cm.MapMember(transaction => transaction.Hash);
 			cm.MapMember(transaction => transaction.From);
 			cm.MapMember(transaction => transaction.To);
+			cm.MapMember(transaction => transaction.Signature);
+			cm.MapMember(transaction => transaction.PublicKey);
 		}
 	}
 

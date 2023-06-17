@@ -1,4 +1,5 @@
-﻿using Domain.SeedWork;
+﻿using System.Security.Cryptography;
+using Domain.SeedWork;
 using FluentResults;
 using Utility;
 
@@ -9,22 +10,42 @@ public class MoneyTransaction : BaseTransaction
 	public static Result<MoneyTransaction> Create(string from, string to,
 		double amount, double fee, string signature, string publicKey)
 	{
+
+
 		Result<MoneyTransaction> result = new();
 
-		var account = new Account().SetPublicKey(publicKey).GetAddress();
 
-		if (from != account)
+		if (string.IsNullOrEmpty(publicKey))
 		{
-			result.WithError("From Account Address And Public Key Is not Match.");
+
+			result.WithError("PublicKey Most Enter");
+			return result;
+
 		}
 
-		var signData = $"{from}-{to}-{amount}-{fee}";
-
-		var verifySignature = new Account().SetPublicKey(publicKey).VerifySign(signData, signature);
-
-		if (!verifySignature)
+		try
 		{
-			result.WithError("Signature is Not Valid!");
+			var account = new Account().SetPublicKey(publicKey).GetAddress();
+
+			if (from != account)
+			{
+				result.WithError("From Account Address And Public Key Is not Match.");
+			}
+
+
+			var signData = $"{from}-{to}-{amount}-{fee}";
+
+			var verifySignature = new Account().SetPublicKey(publicKey).VerifySign(signData, signature);
+
+			if (!verifySignature)
+			{
+				result.WithError("Signature is Not Valid!");
+			}
+		}
+		catch (CryptographicException e)
+		{
+			result.WithError("Public Key Is not Valid");
+
 		}
 
 		if (result.Errors.Any())

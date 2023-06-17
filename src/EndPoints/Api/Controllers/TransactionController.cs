@@ -1,4 +1,5 @@
-﻿using Application.Aggregates.Transaction.Commands;
+﻿using Api.Models;
+using Application.Aggregates.Transaction.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Network.Services;
@@ -19,9 +20,8 @@ public class TransactionController : ApiControllerBase
 	{
 		var result = await Sender.Send(request);
 		if (result.IsFailed)
-
-			return BadRequest(result);
-		return Ok(result);
+			return BadRequest(result.ToResult().ToSimpleResult());
+		return Ok(result.ToSimpleResult());
 	}
 	
 
